@@ -1,0 +1,141 @@
+<div class="page-wrapper">
+  <div class="content">
+    <div class="row">
+      <div class="col-lg-6">
+        <h4 class="page-title">
+          Rendez-vous <span *ngIf="currentRdv.patient?.sexe == 'H'">Mr </span>
+          <span *ngIf="currentRdv.patient?.sexe == 'F'">Mdme </span>
+          {{ currentRdv.patient?.firstname }} {{ currentRdv.patient?.lastname }}
+        </h4>
+      </div>
+      <div class="col-lg-6">
+       <div class="row">
+        <div class="col">
+          <h4 class="page-title">etat de Rendez-vous:</h4>
+        </div>
+        <div class="col">
+          <div
+          class="dropdown action-label"
+          *ngIf="currentRdv.statusRdv == 'ENC'"
+        >
+          <a class="custom-badge status-blue" data-toggle="dropdown">
+            à consulter aujourd'hui
+          </a>
+        </div>
+        <div
+          class="dropdown action-label"
+          *ngIf="currentRdv.statusRdv == 'ANL'"
+        >
+          <a class="custom-badge status-red"> Annuler </a>
+        </div>
+
+        <div class="dropdown action-label" *ngIf="currentRdv.statusRdv == 'TR'">
+          <a class="custom-badge status-green"> Consulté </a>
+        </div>
+        <div
+          class="dropdown action-label"
+          *ngIf="currentRdv.statusRdv == 'CRE'"
+        >
+          <a class="custom-badge status-orange"> nouveau </a>
+        </div>
+        </div>
+       </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <form class="forms-sample" [formGroup]="editForm">
+          <div class="row">
+            <div class="col-8">
+              <fieldset class="form-group border p-3">
+                <legend class="w-auto px-2">Information de Rendez Vous</legend>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="lastname">Type Rendez-vous</label>
+                    <select
+                      class="form-control"
+                      formControlName="typeRdv"
+                      readOnly
+                    >
+                      <option value="Nouvelle Consultation" readOnly>
+                        Nouvelle Consultation
+                      </option>
+                      <option value="Controle" readOnly>Controle</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="lastname">date RendezVous </label>
+
+                    <input
+                      type="date"
+                      class="form-control"
+                      formControlName="dateRdv"
+                      placeholder="date RendezVous..."
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="firstname">heureRdv</label>
+                    <div class="time-icon">
+                      <div class="12hr-example">
+                        <input
+                          placeholder="heure Rendez vous"
+                          class="form-control"
+                          formControlName="heureRdv"
+                          aria-label="12hr format"
+                          readonly
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="col-4">
+                <fieldset class="form-group border p-3">
+                  <legend class="w-auto px-2">Information Supplémentaire</legend>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="lastname"
+                          >motif:</label
+                        >
+
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="motif"
+                          placeholder="motif..."
+                          readonly
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  </fieldset>
+
+            </div>
+          </div>
+
+          <!--<div class="m-t-20 text-center">
+            <button class="btn btn-primary" (click)="editRdv()">
+              Completer Rendez-vous
+            </button>
+          </div>-->
+        </form>
+      </div>
+    </div>
+
+    <app-EditConsultation [rendezVous]="currentRdv"></app-EditConsultation>
+  </div>
+
+</div>
+
+
+

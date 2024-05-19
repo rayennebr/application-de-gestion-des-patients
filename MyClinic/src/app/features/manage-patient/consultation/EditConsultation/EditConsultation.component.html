@@ -1,0 +1,240 @@
+
+
+
+<fieldset class="form-group border p-3">
+  <legend class="w-auto px-2">
+    <span *ngIf="currentConsultation$==null">Nouvelle Consultation</span>
+    <span *ngIf="currentConsultation$!=null">Code Consultation</span>
+  </legend>
+    <div class="row">
+      <div class="col-lg-12">
+        <form class="forms-sample" [formGroup]="editForm">
+          <div class="row">
+
+            <div class="col-4">
+              <div class="row">
+                <fieldset class="form-group border p-3">
+                  <legend class="w-auto px-2">
+                    Information supplémentaire
+                  </legend>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="lastname"
+                        >taille Patient(cm)<span style="color: red"
+                          >*</span
+                        ></label
+                      >
+
+                      <input
+                        type="number"
+                        class="form-control"
+                        formControlName="taillePatient"
+                        placeholder="taille Patient..."
+                        [(ngModel)]="taille"
+                        (ngModelChange)="calculPoids($event)"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted && editForm.get('taillePatient')?.errors
+                        }"
+                        required
+                      />
+                      <div
+                        *ngIf="
+                          submitted && editForm.get('taillePatient')?.errors
+                        "
+                        class="invalid-feedback"
+                      >
+                        taille Patient est obligatoire
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="lastname"
+                        >poids Patient <span style="color: red">*</span></label
+                      >
+
+                      <input
+                        type="number"
+                        class="form-control"
+                        formControlName="poidsPatient"
+                        placeholder="poids Patient..."
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted && editForm.get('poidsPatient')?.errors
+                        }"
+                        required
+                      />
+                      <div
+                        *ngIf="
+                          submitted && editForm.get('poidsPatient')?.errors
+                        "
+                        class="invalid-feedback"
+                      >
+                        poids Patient est obligatoire
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <div class="col-8">
+              <fieldset class="form-group border p-3">
+                <legend class="w-auto px-2">
+                  prediction avec Information Suplémentaire
+                </legend>
+                <div class="table-responsive">
+                  <table class="table mb-0">
+                    <thead class="d-none"></thead>
+                    <tbody>
+                      <tr>
+                        <td style="min-width: 200px">
+                          <h5 class="time-title p-0">
+                            poids idéal selon la formule de Lorentz :
+                          </h5>
+                        </td>
+                        <td>
+                          <h5 class="time-title p-0">{{ poidsLorentz }}</h5>
+                          <p>Taille – 100 – ((Taille – 150) / 2,5 )</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="min-width: 200px">
+                          <h5 class="time-title p-0">
+                            poids idéal selon la formule de Creff
+                          </h5>
+                        </td>
+                        <td>
+                          <h5 class="time-title p-0">{{ poidsCreff }}</h5>
+                          <p>(taille en cm – 100 + âge / 10 ) x 0,9</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="min-width: 200px">
+                          <h5 class="time-title p-0">
+                            poids idéal selon la formule de Creff pour une
+                            morphologie mince
+                          </h5>
+                        </td>
+                        <td>
+                          <h5 class="time-title p-0">{{ poidsCreffM }}</h5>
+                          <p>(taille en cm – 100 + âge / 10 ) x 0,9 x 0,9</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="min-width: 200px">
+                          <h5 class="time-title p-0">
+                            poids idéal selon la formule de Creff pour une
+                            morphologie large
+                          </h5>
+                        </td>
+                        <td>
+                          <h5 class="time-title p-0">{{ poidsCreffL }}</h5>
+                          <p>(taille en cm – 100 + âge / 10 ) x 0,9 x 1,1</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </fieldset>
+
+          </div>
+
+          </div>
+            <div class="row">
+              <div class="col">
+                <fieldset class="form-group border p-3">
+                  <legend class="w-auto px-2">Information de consultation</legend>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="lastname"
+                        >Examen <span style="color: red">*</span></label
+                      >
+
+                      <textarea
+                        rows="8"
+                        class="form-control"
+                        formControlName="examenConsultation"
+                        placeholder="Examen..."
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted && editForm.get('examenConsultation')?.errors
+                        }"
+                        required
+                      >
+                      </textarea>
+                      <div
+                        *ngIf="submitted && editForm.get('examenConsultation')?.errors"
+                        class="invalid-feedback"
+                      >
+                        Examen est obligatoire
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="lastname"
+                        >Signe:<span style="color: red">*</span></label
+                      >
+
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="motifConsultation"
+                        placeholder="Signe..."
+                        [ngClass]="{
+                          'is-invalid': submitted && editForm.get('motifConsultation')?.errors
+                        }"
+                        required
+                      />
+                      <div
+                        *ngIf="submitted && editForm.get('motifConsultation')?.errors"
+                        class="invalid-feedback"
+                      >
+                        Signe est obligatoire
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="lastname"
+                        >Montant:<span style="color: red">*</span></label
+                      >
+
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="prixConsultation"
+                        placeholder="prix Consultation..."
+                        [ngClass]="{
+                          'is-invalid': submitted && editForm.get('prixConsultation')?.errors
+                        }"
+                        required
+                      />
+                      <div
+                        *ngIf="submitted && editForm.get('prixConsultation')?.errors"
+                        class="invalid-feedback"
+                      >
+                      prix Consultation est obligatoire
+                      </div>
+                    </div>
+                  </div>
+
+                </fieldset>
+            </div>
+          </div>
+          <div class="m-t-20 text-center" *ngIf="currentConsultation$==null">
+            <button class="btn btn-primary" (click)="createConsultation()">
+              Completer Consultation
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    </fieldset>
+    <br />
+
+

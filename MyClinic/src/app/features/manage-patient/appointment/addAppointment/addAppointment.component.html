@@ -1,0 +1,182 @@
+<div class="page-wrapper">
+  <div class="content">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <h4 class="page-title">Ajouter Rendez-vous</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 ">
+        <form class="forms-sample" [formGroup]="addForm">
+          <div class="row">
+            <div class="col-8">
+              <fieldset class="form-group border p-3">
+                <legend class="w-auto px-2">Information Rendez-vous</legend>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="lastname"
+                      >Type Rendez-vous<span style="color: red">*</span></label
+                    >
+                    <select
+                      class="form-control"
+                      formControlName="typeRdv"
+                      [ngClass]="{
+                        'is-invalid': submitted && addForm.get('typeRdv')?.errors
+                      }"
+                      required
+                    >
+                      <div
+                        *ngIf="submitted && addForm.get('typeRdv')?.errors"
+                        class="invalid-feedback"
+                      >
+                        Type Rendez-vous est obligatoire
+                      </div>
+                      <option value="Nouvelle Consultation">
+                        Nouvelle Consultation
+                      </option>
+                      <option value="Controle">Controle</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="lastname"
+                      >date RendezVous <span style="color: red">*</span></label
+                    >
+
+                    <input
+                      type="date"
+                      class="form-control"
+                      formControlName="dateRdv"
+                      placeholder="date RendezVous..."
+                      [(ngModel)]="dateValue"
+                      (ngModelChange)="getDateValue($event)"
+                      [ngClass]="{
+                        'is-invalid': submitted && addForm.get('dateRdv')?.errors
+                      }"
+                      required
+                    />
+                    <div
+                      *ngIf="submitted && addForm.get('dateRdv')?.errors"
+                      class="invalid-feedback"
+                    >
+                      date RendezVous est obligatoire
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="firstname"
+                      >heureRdv <span style="color: red">*</span></label
+                    >
+                    <div class="time-icon">
+                      <div class="12hr-example">
+                        <input
+                          placeholder="heure Rendez vous"
+                          class="form-control"
+                          formControlName="heureRdv"
+                          aria-label="12hr format"
+                          [ngxTimepicker]="default"
+                          readonly
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted && addForm.get('heureRdv')?.errors
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="submitted && addForm.get('heureRdv')?.errors"
+                          class="invalid-feedback"
+                        >
+                          heure RendezVous est obligatoire
+                        </div>
+
+                        <ngx-material-timepicker #default></ngx-material-timepicker>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </fieldset>
+            </div>
+
+            <div class="col-4">
+              <fieldset class="form-group border p-3">
+                <legend class="w-auto px-2">Information Supplémentaire</legend>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="lastname"
+                        >motif:<span style="color: red">*</span></label
+                      >
+
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="motif"
+                        placeholder="motif..."
+                        [ngClass]="{
+                          'is-invalid': submitted && addForm.get('motif')?.errors
+                        }"
+                        required
+                      />
+                      <div
+                        *ngIf="submitted && addForm.get('motif')?.errors"
+                        class="invalid-feedback"
+                      >
+                        motif est obligatoire
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </fieldset>
+            </div>
+          </div>
+
+
+          <div class="m-t-20 text-center">
+            <button class="btn btn-primary" (click)="addRdv()">
+              ajouter Rendez-vous
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-lg-12 d-flex flex-column">
+        <div class="card member-panel">
+          <div class="card-header bg-white">
+            <h4 class="card-title mb-0">
+              Liste des Rendez vous pour le {{ dateValue }}
+            </h4>
+          </div>
+          <div class="card-body">
+            <ul class="contact-list">
+              <li *ngFor="let item of currentRendezVous$">
+                <div class="contact-cont">
+                  <div class="float-left user-img m-r-10">
+                    <img
+                      src="assets/img/user.jpg"
+                      alt=""
+                      class="w-40 rounded-circle"
+                    /><span class="status online"></span>
+                  </div>
+                  <div class="contact-info">
+                    <span class="contact-name text-ellipsis"
+                      >{{ item.patient?.firstname }}
+                      {{ item.patient?.lastname }}</span
+                    >
+                    <span class="contact-date">{{ item.heureRdv }}</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

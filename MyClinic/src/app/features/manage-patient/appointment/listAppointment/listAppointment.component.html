@@ -1,0 +1,272 @@
+<div class="page-wrapper">
+  <div class="content">
+    <div class="row">
+      <div class="col-sm-4 col-3"></div>
+      <div class="col-sm-8 col-9 text-right m-b-20">
+        <a
+          [routerLink]="['/manage/addAppoitment']"
+          (click)="addRdv()"
+          class="btn btn btn-primary btn-rounded float-right"
+          ><i class="fa fa-plus"></i> Ajouter Rendez-vous</a
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 d-flex flex-column">
+        <div class="row flex-grow">
+          <div class="col-12 grid-margin stretch-card">
+            <div class="card card-rounded">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h3 class="card-title card-title-dash">
+                    liste des Rendez Vous de
+                    <span *ngIf="patient.sexe == 'H'">Mr</span>
+                    <span *ngIf="patient.sexe == 'F'">Mdme</span>
+                    {{ patient.firstname }} {{ patient.lastname }}
+                  </h3>
+                  <div class="add-items d-flex mb-0">
+                    <!-- <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?"> -->
+                  </div>
+                </div>
+                <br />
+                <p-table
+                  #dt
+                  [value]="rendezVousPerPatient$"
+                  dataKey="idRdv"
+                  [rowHover]="true"
+                  [rows]="5"
+                  [reorderableColumns]="true"
+                  [showCurrentPageReport]="true"
+                  [rowsPerPageOptions]="[5, 10, 50]"
+                  [paginator]="true"
+                  [exportHeader]="'customExportHeader'"
+                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                  [filterDelay]="0"
+                  [globalFilterFields]="[
+                    'qenqRef',
+                    'qenqTit',
+                    'qenqType',
+                    'qenqDatdem',
+                    'qenqStatut'
+                  ]"
+                  [resizableColumns]="true"
+                  selectionMode="single"
+                  styleClass="p-datatable-gridlines"
+                  [scrollable]="true"
+                  scrollHeight="700px"
+                >
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th pResizableColumn pSortableColumn="codeRdv">
+                        <div
+                          class="flex justify-content-between align-items-center"
+                        >
+                          code Rdv
+                          <p-sortIcon field="codeRdv"></p-sortIcon>
+                          <p-columnFilter
+                            type="text"
+                            field="codeRdv"
+                            display="menu"
+                            class="ml-auto"
+                          ></p-columnFilter>
+                        </div>
+                      </th>
+
+                      <th pResizableColumn pSortableColumn="dateRdv">
+                        <div
+                          class="flex justify-content-between align-items-center"
+                        >
+                          date Rdv
+                          <p-sortIcon field="dateRdv"></p-sortIcon>
+                          <p-columnFilter
+                            type="text"
+                            field="dateRdv"
+                            display="menu"
+                            class="ml-auto"
+                          ></p-columnFilter>
+                        </div>
+                      </th>
+
+                      <th pResizableColumn pSortableColumn="heureRdv">
+                        <div
+                          class="flex justify-content-between align-items-center"
+                        >
+                          heure Rdv
+                          <p-sortIcon field="heureRdv"></p-sortIcon>
+                          <p-columnFilter
+                            type="text"
+                            field="heureRdv"
+                            display="menu"
+                            class="ml-auto"
+                          ></p-columnFilter>
+                        </div>
+                      </th>
+
+                      <th pResizableColumn pSortableColumn="statusRdv">
+                        <div
+                          class="flex justify-content-between align-items-center"
+                        >
+                          status Rdv
+                          <p-sortIcon field="statusRdv"></p-sortIcon>
+                          <p-columnFilter
+                            type="text"
+                            field="statusRdv"
+                            display="menu"
+                            class="ml-auto"
+                          ></p-columnFilter>
+                        </div>
+                      </th>
+
+                      <th pResizableColumn pSortableColumn="motif">
+                        <div
+                          class="flex justify-content-between align-items-center"
+                        >
+                          motif de Rdv
+                          <p-sortIcon field="motif"></p-sortIcon>
+                          <p-columnFilter
+                            type="text"
+                            field="motif"
+                            display="menu"
+                            class="ml-auto"
+                          ></p-columnFilter>
+                        </div>
+                      </th>
+
+                      <th>Actions</th>
+                    </tr>
+
+                    <tr>
+                      <th>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Quelques"
+                          _mstplaceholder="44980"
+                          _msthash="211"
+                          style="border: 1px solid #2b303542; color: #2b3035"
+                          (input)="
+                            dt.filter(
+                              $any($event.target).value,
+                              'codeRdv',
+                              'contains'
+                            )
+                          "
+                          placeholder=" Search"
+                        />
+                      </th>
+                      <th>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Quelques"
+                          _mstplaceholder="44980"
+                          _msthash="211"
+                          style="border: 1px solid #2b303542; color: #2b3035"
+                          (input)="
+                            dt.filter(
+                              $any($event.target).value,
+                              'dateRdv',
+                              'contains'
+                            )
+                          "
+                          placeholder=" Search"
+                        />
+                      </th>
+
+                      <th>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Quelques"
+                          _mstplaceholder="44980"
+                          _msthash="211"
+                          style="border: 1px solid #2b303542; color: #2b3035"
+                          (input)="
+                            dt.filter(
+                              $any($event.target).value,
+                              'heureRdv',
+                              'contains'
+                            )
+                          "
+                          placeholder=" Search"
+                        />
+                      </th>
+
+                      <th>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Quelques"
+                          _mstplaceholder="44980"
+                          _msthash="211"
+                          style="border: 1px solid #2b303542; color: #2b3035"
+                          (input)="
+                            dt.filter(
+                              $any($event.target).value,
+                              'statusRdv',
+                              'contains'
+                            )
+                          "
+                          placeholder=" Search"
+                        />
+                      </th>
+
+                      <th>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Quelques"
+                          _mstplaceholder="44980"
+                          _msthash="211"
+                          style="border: 1px solid #2b303542; color: #2b3035"
+                          (input)="
+                            dt.filter(
+                              $any($event.target).value,
+                              'motif',
+                              'contains'
+                            )
+                          "
+                          placeholder=" Search"
+                        />
+                      </th>
+
+                      <th></th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-item>
+                    <tr [pSelectableRow]="item" (click)="getRendezVous(item)">
+                      <td>{{ item.codeRdv }}</td>
+                      <td>{{ item.dateRdv | date : "dd/MM/yyyy" }}</td>
+                      <td>{{ item.heureRdv }}</td>
+                      <td>{{ item.statusRdv | StatusPipe }}</td>
+                      <td><a class="custom-badge status-red "  >
+                        {{item.motif}}
+                    </a>
+                      </td>
+                      <td *ngIf="item.statusRdv!='TR'">
+                        <a
+                          [routerLink]="['/manage/editAppoitment']"
+                          (click)="editRdv(item)"
+                          class="btn btn btn-primary btn-rounded float-right"
+                          ><i class="fa fa-edit"></i>
+                        </a>
+                      </td>
+                      <td *ngIf="item.statusRdv=='TR'">
+                        <a
+                          [routerLink]="['/manage/editAppoitment']"
+                          (click)="editRdv(item)"
+                          class="btn btn btn-primary btn-rounded float-right"
+                          ><i class="fa fa-eye"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

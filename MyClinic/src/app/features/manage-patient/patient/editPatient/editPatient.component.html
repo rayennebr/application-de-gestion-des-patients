@@ -1,0 +1,312 @@
+<div class="page-wrapper">
+  <div class="content">
+    <div class="row">
+      <div class="col">
+        <h4 class="page-title">Fiche patient numéro 0{{patient.idPatient}} : {{patient.firstname}} {{patient.lastname}}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <form class="forms-sample" [formGroup]="editForm">
+
+          <div class="row">
+            <div class="col-lg-6">
+              <fieldset class="form-group border p-3">
+                <legend class="w-auto px-2">Information personnel</legend>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>CIN: </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="codePatient"
+                        placeholder="Cin..."
+                        readonly
+                      />
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Nom:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="lastname"
+                        placeholder="nom..."
+                        readonly
+                      />
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Prenom: </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="firstname"
+                        placeholder="prenom..."
+                        readonly
+                      />
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label
+                        >Date de naissance: </label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        formControlName="dateNaissance"
+                        readonly
+                      />
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group gender-select">
+                      <label class="gen-label">Sexe:</label>
+                      <div class="form-check-inline">
+                        <label class="form-check-label">
+                          <input
+                            type="radio"
+                            name="gender"
+                            class="form-check-input"
+                            [checked]="sexeH"
+                            value="H"
+                            [disabled]="true"
+                          />Male
+                        </label>
+                      </div>
+                      <div class="form-check-inline">
+                        <label class="form-check-label">
+                          <input
+                            type="radio"
+                            name="gender"
+                            class="form-check-input"
+                            [checked]="sexeF"
+                            value="F"
+                            [disabled]="true"
+                          />Female
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="col-lg-6">
+              <fieldset class="form-group border p-3">
+                <legend class="w-auto px-2">Information supplémentaire</legend>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="display-block">Etat Civil:</label>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="status"
+                          id="patient_active"
+                          value="Marier"
+                          [checked]="situationM"
+                          [disabled]="true"
+
+                        />
+                        <label class="form-check-label" for="patient_active"> Mariée</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="status"
+                          id="patient_inactive"
+                          value="celebataire"
+                          [checked]="situationC"
+                          [disabled]="true"
+                        />
+                        <label class="form-check-label" for="patient_inactive">
+                          Célébataire
+                        </label>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Code Assurance: </label>
+                      <input class="form-control"  formControlName="codeAssurance" type="text"  placeholder="code Assurance..."
+                      readonly
+                     >
+
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6">
+
+              <fieldset class="form-group border p-3">
+                <legend class="w-auto px-2">Adresse et contact</legend>
+                <div class="row">
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>adresse: </label>
+                      <input class="form-control"  formControlName="adresse" type="text"  placeholder="adresse..."
+                      readonly
+                     >
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>ville: </label>
+                      <input class="form-control"  formControlName="ville" type="text"  placeholder="ville..."
+                      readonly
+                     >
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>pays: </label>
+                      <input class="form-control"  formControlName="pays" type="text"  placeholder="pays..."
+                      readonly
+                     >
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>email: </label>
+                      <input class="form-control"  formControlName="email" type="text"  placeholder="email..."
+                      readonly
+                     >
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Téléphone: </label>
+                      <input class="form-control"  formControlName="numTel" type="text"  placeholder="+216..."
+                      readonly/>
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+
+            </div>
+
+            <div class="col-lg-6">
+              <fieldset class="form-group border p-3">
+                <legend class="w-auto px-2">Historique et Maladie</legend>
+                <div class="row">
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="lastname"
+                        >allergies: </label
+                      >
+
+                      <textarea rows="3"
+                        class="form-control"
+                        formControlName="allergie"
+                        placeholder="allergie..."
+                        readonly
+                      > </textarea>
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="lastname"
+                        >antecedants Personnels: </label
+                      >
+
+                      <textarea rows="3"
+                        class="form-control"
+                        formControlName="antecedantPerso"
+                        placeholder="antecedants Personnels:..."
+                        readonly
+
+                      > </textarea>
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="lastname"
+                        >anticidants Familliales: </label
+                      >
+
+                      <textarea rows="3"
+                        class="form-control"
+                        formControlName="anticidentFam"
+                        placeholder="anticidants Familliales..."
+                        readonly
+                      > </textarea>
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="lastname"
+                        >maladies Croniques: </label
+                      >
+
+                      <textarea rows="3"
+                        class="form-control"
+                        formControlName="maladieCronique"
+                        placeholder="maladies Croniques..."
+                        readonly
+
+                      > </textarea>
+
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+            </div>
+
+          </div>
+
+          <!--<div class="m-t-20 text-center">
+            <button class="btn btn-primary submit-btn" >
+              Ajouter Patient
+            </button>
+          </div>-->
+
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <fieldset class="form-group border p-3">
+          <legend class="w-auto px-2">Historique Consultation</legend>
+          </fieldset>
+      </div>
+    </div>
+  </div>
+</div>

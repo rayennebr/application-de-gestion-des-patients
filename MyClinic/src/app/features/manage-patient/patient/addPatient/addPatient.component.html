@@ -1,0 +1,360 @@
+<div class="page-wrapper">
+  <div class="content">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <h4 class="page-title">Remplir le fiche du Patient</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <form class="forms-sample" [formGroup]="addForm">
+          <fieldset class="form-group border p-3">
+            <legend class="w-auto px-2">Information personnel</legend>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>CIN: <span class="text-danger">*</span></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="codePatient"
+                    placeholder="Cin..."
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && addForm.get('codePatient')?.errors
+                    }"
+                    required
+                  />
+                  <div
+                    *ngIf="submitted && addForm.get('codePatient')?.errors"
+                    class="invalid-feedback"
+                  >
+                    CIN est obligatoire
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Nom:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="lastname"
+                    placeholder="nom..."
+                    [ngClass]="{
+                      'is-invalid': submitted && addForm.get('lastname')?.errors
+                    }"
+                    required
+                  />
+                  <div
+                    *ngIf="submitted && addForm.get('lastname')?.errors"
+                    class="invalid-feedback"
+                  >
+                    Nom est obligatoire
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Prenom: <span class="text-danger">*</span></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="firstname"
+                    placeholder="prenom..."
+                    [ngClass]="{
+                      'is-invalid': submitted && addForm.get('firstname')?.errors
+                    }"
+                    required
+                  />
+                  <div
+                    *ngIf="submitted && addForm.get('firstname')?.errors"
+                    class="invalid-feedback"
+                  >
+                    Prénom est obligatoire
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label
+                    >Date de naissance: <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    formControlName="dateNaissance"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && addForm.get('dateNaissance')?.errors
+                    }"
+                    required
+                  />
+                  <div
+                    *ngIf="submitted && addForm.get('dateNaissance')?.errors"
+                    class="invalid-feedback"
+                  >
+                    Date de naissance est obligatoire
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group gender-select">
+                  <label class="gen-label">Sexe:</label>
+                  <div class="form-check-inline">
+                    <label class="form-check-label">
+                      <input
+                        type="radio"
+                        name="gender"
+                        class="form-check-input"
+                        formControlName="sexe"
+                        value="H"
+                      />Male
+                    </label>
+                  </div>
+                  <div class="form-check-inline">
+                    <label class="form-check-label">
+                      <input
+                        type="radio"
+                        name="gender"
+                        class="form-check-input"
+                        formControlName="sexe"
+                        value="F"
+                      />Female
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group border p-3">
+            <legend class="w-auto px-2">Information supplémentaire</legend>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="display-block">Etat Civil:</label>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="status"
+                      id="patient_active"
+                      value="Marier"
+                      formControlName="situation"
+
+                    />
+                    <label class="form-check-label" for="patient_active"> Mariée</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="status"
+                      id="patient_inactive"
+                      value="celebataire"
+                      formControlName="situation"
+                    />
+                    <label class="form-check-label" for="patient_inactive">
+                      Célébataire
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Code Assurance: </label>
+                  <input class="form-control"  formControlName="codeAssurance" type="text"  placeholder="code Assurance..."
+                  [ngClass]="{'is-invalid':submitted &&  addForm.get('codeAssurance')?.errors }" required>
+                  <div *ngIf="submitted && addForm.get('codeAssurance')?.errors" class="invalid-feedback">
+                    Code Assurance est obligatoire
+                     </div>
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group border p-3">
+            <legend class="w-auto px-2">Adresse et contact</legend>
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>adresse: </label>
+                  <input class="form-control"  formControlName="adresse" type="text"  placeholder="adresse..."
+                  [ngClass]="{'is-invalid':submitted &&  addForm.get('adresse')?.errors }" required>
+                  <div *ngIf="submitted && addForm.get('adresse')?.errors" class="invalid-feedback">
+                    adresse est obligatoire
+                     </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>ville: </label>
+                  <input class="form-control"  formControlName="ville" type="text"  placeholder="ville..."
+                  [ngClass]="{'is-invalid':submitted &&  addForm.get('ville')?.errors }" required>
+                  <div *ngIf="submitted && addForm.get('ville')?.errors" class="invalid-feedback">
+                    ville est obligatoire
+                     </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>pays: </label>
+                  <input class="form-control"  formControlName="pays" type="text"  placeholder="pays..."
+                  [ngClass]="{'is-invalid':submitted &&  addForm.get('pays')?.errors }" required>
+                  <div *ngIf="submitted && addForm.get('pays')?.errors" class="invalid-feedback">
+                    pays est obligatoire
+                     </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>email: </label>
+                  <input class="form-control"  formControlName="email" type="text"  placeholder="email..."
+                  [ngClass]="{'is-invalid':submitted &&  addForm.get('email')?.errors }" required>
+                  <div *ngIf="submitted && addForm.get('email')?.errors" class="invalid-feedback">
+                    email est obligatoire
+                     </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Téléphone: </label>
+                  <input class="form-control"  formControlName="numTel" type="text"  placeholder="+216..."/>
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group border p-3">
+            <legend class="w-auto px-2">Historique et Maladie</legend>
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="lastname"
+                    >allergies: <span style="color: red">*</span></label
+                  >
+
+                  <textarea rows="3"
+                    class="form-control"
+                    formControlName="allergie"
+                    placeholder="allergie..."
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && addForm.get('allergie')?.errors
+                    }"
+                    required
+                  > </textarea>
+                  <div
+                    *ngIf="submitted && addForm.get('allergie')?.errors"
+                    class="invalid-feedback"
+                  >
+                  allergie est obligatoire
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="lastname"
+                    >antecedants Personnels: <span style="color: red">*</span></label
+                  >
+
+                  <textarea rows="3"
+                    class="form-control"
+                    formControlName="antecedantPerso"
+                    placeholder="antecedants Personnels:..."
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && addForm.get('antecedantPerso')?.errors
+                    }"
+                    required
+                  > </textarea>
+                  <div
+                    *ngIf="submitted && addForm.get('antecedantPerso')?.errors"
+                    class="invalid-feedback"
+                  >
+                  antecedants Personnels: est obligatoire
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="lastname"
+                    >anticidants Familliales: <span style="color: red">*</span></label
+                  >
+
+                  <textarea rows="3"
+                    class="form-control"
+                    formControlName="anticidentFam"
+                    placeholder="anticidants Familliales..."
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && addForm.get('anticidentFam')?.errors
+                    }"
+                    required
+                  > </textarea>
+                  <div
+                    *ngIf="submitted && addForm.get('anticidentFam')?.errors"
+                    class="invalid-feedback"
+                  >
+                  anticidants Familliales est obligatoire
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="lastname"
+                    >maladies Croniques: <span style="color: red">*</span></label
+                  >
+
+                  <textarea rows="3"
+                    class="form-control"
+                    formControlName="maladieCronique"
+                    placeholder="maladies Croniques..."
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && addForm.get('maladieCronique')?.errors
+                    }"
+                    required
+                  > </textarea>
+                  <div
+                    *ngIf="submitted && addForm.get('maladieCronique')?.errors"
+                    class="invalid-feedback"
+                  >
+                  maladies Croniques est obligatoire
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <div class="m-t-20 text-center">
+            <button class="btn btn-primary submit-btn" (click)="addPatient()">
+              Ajouter Patient
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
