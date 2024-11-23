@@ -43,7 +43,7 @@ L'application est construite selon une architecture **frontend-backend**. Les de
 
 3. **Lancer l'application :**
    ```bash
-  ng serve
+   ng serve
 
 ---
 ## GestionPatient (Backend)
